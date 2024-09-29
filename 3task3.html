@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+   <style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite; /* Animate between different color gradients */
+    font-family: 'Arial', sans-serif;
+}
+
+@keyframes gradientShift {
+    0% {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Pink and light coral */
+    }
+    25% {
+        background: linear-gradient(135deg, #fbc2eb, #a18cd1); /* Purple and light pink */
+    }
+    50% {
+        background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Light blue and sky blue */
+    }
+    75% {
+        background: linear-gradient(135deg, #d4fc79, #96e6a1); /* Lime green and pastel green */
+    }
+    100% {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Loop back to original colors */
+    }
+}
+
+.calculator {
+    display: grid;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px;
+}
+
+#display {
+    grid-column: span 4;
+    height: 60px;
+    text-align: right;
+    padding: 10px;
+    font-size: 1.5em;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+button {
+    width: 100%;
+    height: 65px;
+    font-size: 1.4em;
+    border: none;
+    background: #e0e7ff;
+    color: #333;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: #b3bce8;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    background: #8894c9;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(2px);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0px 0px 10px rgba(100, 149, 237, 0.7);
+}
+
+</style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled />
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('-')">-</button>
+
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendToDisplay('+')">+</button>
+        </div>
+    </div>
+<script>
+function clearDisplay() {
+    document.getElementById('display').value = '';
+}
+
+function appendToDisplay(value) {
+    document.getElementById('display').value += value;
+}
+
+function calculateResult() {
+    let display = document.getElementById('display');
+    try {
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = 'Error';
+    }
+}
+</script>
+</body>
+</html>
